@@ -35,10 +35,14 @@ public class DesignTacoController {
 			model.addAttribute(type.toString().toLowerCase(),filterByType(ingredients, type));
 		}
 		model.addAttribute("design", new Taco());
-		return "design";
+		return "designForm";
 	}
 	@PostMapping
-	public String processDesign(Taco design) {//doubt
+	public String processDesign(@Valid Taco design , Errors errors) {//doubt
+		if (errors.hasErrors()) {	
+			return "designForm";
+		}
+
 		// Save the taco design...
 		// We'll do this in chapter 3
 		log.info("Processing design: " + design);
